@@ -1,0 +1,293 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Spring Cloud Configuration Server</title>
+</head>
+<style>
+   h1 {
+    background: #2c2c2c; /* Цвет фона, #a9a9a9 или #c7b39b */
+    color: #8b9b55; /* Цвет текста */
+    padding: 2px; /* Поля вокруг текста */
+     text-align:  center;
+   }
+</style>
+<style>
+   body {
+    color: #d3d3d3; /* Цвет текста */	
+    background-color: #2c2c2c; /* Цвет фона c7b39b*/
+   }
+
+</style>
+
+<body>
+<h1><font color="#8b9b55"><font color="#8b9b55">Spring boot service. </font></font></h1>
+<h1><font color="#8b9b55"> Сервис собран специально для проверки и тестирования архитектуры.</font></h1>
+<!-- Комментарий -->
+<table class="demoTable1" cellspacing="2" border="1" cellpadding="5" width="100%" font color="#8b9b55"
+       style="height: 54px;">
+    <thead>
+    <tr>
+        <td>
+            <p><font color="#8b9b55"><font color="#8b9b55"><strong>Назначение приложения</strong></font></font>
+            </p>
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <p><font color="#8b9b55"><font color="#8b9b55">Сервис позволяет проверить работу системы логирования.</font></font>
+            </p>
+            <p><font color="#8b9b55"><font color="#8b9b55">Можно выставлять в application.properties нужный уровень
+                [INFO, DEBUG, WARN, TRACE].</font></font></p>
+            <p><font color="#8b9b55"><font color="#8b9b55">Сервис позволяет проверить работу системы трассировки
+                Jaeger.</font></font></p>
+            <p><font color="#8b9b55"><font color="#8b9b55">Сервис позволяет проверить работу системы Prometheus.</font></font>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><font color="#8b9b55"><font color="#8b9b55">Чего в этом сервисе не реализовано.</font></font></p>
+            <p>
+			<font color="#8b9b55"><font color="#8b9b55">Нет работы с профилями (dev, test, pord).</font></font><br>
+            <font color="#8b9b55"><font color="#8b9b55">Нет шифрования паролей в application.prporeties типа Jasypt</font></font><br>
+            <font color="#8b9b55"><font color="#8b9b55">Нет автоматической конфигурации сервиса с помощью технологии Spring Boot Cloud Config.Это когда есть общий сервис конфигурации, читащий в GIT настройки и передающий, через Actuator эти настройки в приложение.</font></font><br>
+            </p>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+<p>&nbsp;</p>
+
+<p></p>
+<h1>Основные возможности</h1>
+<p></p>
+<table class="OptionTable" cellspacing="2" border="1" cellpadding="5" style="height: 54px; text-align: center;">
+    <thead>
+    <tr>
+        <td><span style="color: #495a7e;"> Функция </span>: Наименование</td>
+        <td><span style="color: #495a7e;"> Полное </span>: Описание функции</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><p>Содержит Res Controller MF </p></td>
+        <td style=" text-align: left;"><strong>	Работа с коллекцией данных (Fake сотрудники)</strong><br>
+		<p></p>
+		<font color="#8b9b55"><strong>
+		Fake котроллер содержащий репозиторий данных с фейковыми данными сотрудников.<br>
+		К репозиторю можно делать REST запросы на получение данных по всему списку, по <br>
+		конкретному сотруднику, передавая ID, либо список сотрудников с одинаковой заралпатой.<br>
+		Можно удалить запись по сотруднику, и добавить новую запись.<br></strong>
+		</font>
+		<p></p>
+			GET  /api/v1/ Запрос выдачи всех сотрудников компании<br>
+			POST /api/v1/add  Добавление записи сотрудника<br>
+			GET  /api/v1/customers Запрос выдачи всех сотрудников компании<br>
+			GET  /api/v1/del/{id}  Удаление записи сотрудника по его ID<br>
+			GET  /api/v1/get_id Поиск сотрудника по его ID<br>
+			GET  /api/v1/id/{id}  Поиск сотрудника по его ID<br>
+			GET  /api/v1/salary/{salary}  Поиск сотрудника по его зарплате<br>
+			GET  /api/v1/users  Запрос выдачи всех сотрудников компании<br>
+		</td>
+    </tr>
+    <tr>
+        <td><p>Содержит Service Rest Controller </p></td>
+        <td style=" text-align: left;"><strong>	Описание второго контроллера</strong><br>
+		<p></p>
+		<font color="#8b9b55"><strong>
+		Контроллер для имитации сбоя, когда приложение внезапно завершается.<br>
+		Также здесь есть полезная фуекция по имитации нагрузки на процессор и память.<br>
+		Использована библиотека FakeLoad https://github.com/msigwart/fakeload.<br>
+		Насколько она реально работает, это уже будем смотреть вместе).<br></strong>
+		</font>
+		<p></p>
+			GET  /api/service/error Вызов системной ошибки<br>
+			GET  /api/service/getlog Получение текущего уровня логирования<br>
+			GET  /api/service/setlog/{logLevel} Установка уровня логирования<br>
+			GET  /api/service/usage Имитация загрузки системы (процессора и памяти) CPU, MEMORY<br>
+		</td>
+    </tr>
+    <tr  style=" text-align: left;">
+        <td><p>Приложение содержит 2 Mock теста </p></td>
+        <td>Первый тест contextLoads()    - тест на то, что контроллер прошел инициализацию.<br>
+			Второй тест conetstLoadHtml() - тест на то, контролле вернет в запрос по определнному пользовталю ответ из репозитория с правильным набором в Response (5888068)
+		</td>
+    </tr>
+    </tbody>
+</table>
+<p>&nbsp;</p>
+
+
+<h1><font color="#8b9b55"><font color="#8b9b55">Документация Swagger</font></font></h1>
+<p style="text-align: center;"><a href="../swagger-ui.html" style="color:#245cd6;"><strong>../swagger-ui.html</strong></a> 
+<font color="#8b9b55"><em> <strong>Переход на документацию Swagger</strong></em></font></p>
+<thead>
+<p></p>
+
+
+<p></p>
+<h1>Запуск программы.</h1>
+<p></p>
+<table class="RunApplication" cellspacing="2" border="1" cellpadding="5" style="height: 54px; text-align: center;">
+    <thead>
+    <tr>
+        <td><span style="color: #495a7e;"> Команда запуска приложения </span>:</td>
+        <td><span style="color: #495a7e;"> Краткое </span>: Описание</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><p>java -jar acceptance-0.0.2.jar </p></td>
+        <td>Для управления проектом можно использовать внешний файл application.properties.<br> 
+		Файл должен быть расположен в одном каталоге с файлом Jar или подкаталоге ./config</td>
+    </tr>
+    </tbody>
+</table>
+<p>&nbsp;</p>
+
+<p></p>
+<h1>Описание application.properties</h1>
+<p></p>
+<table class="RunApplication" cellspacing="2" border="1" cellpadding="5" style="height: 54px; text-align: center;">
+    <thead>
+    <tr>
+        <td><span style="color: #495a7e;">Опции в файле </span>: Наименование</td>
+        <td><span style="color: #495a7e;">Краткое </span> : Описание          </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><p>server.port</p></td>
+        <td>Порт на котором будет работать tomcat</td>
+    </tr>
+
+    <tr>
+        <td><p>management.endpoints.web.exposure.include</p></td>
+        <td>Actuator property<br>
+		Какие опции открыть для получения метрик в actuator'e</td>
+    </tr>
+    <tr>
+        <td><p>server.port</p></td>
+        <td>Порт на котором будет работать tomcat</td>
+    </tr>
+    <tr>
+        <td><p>spring.banner.location</p></td>
+        <td>Банер Уралсиба (просто украшение)</td>
+    </tr>
+    <tr>
+        <td><p>Log level</p></td>
+        <td>Уровнилогирования в приложении (INFO,WARN,DEBUG,TRACE)</td>
+    </tr>
+    <tr>
+        <td><p>logging.file.path</p></td>
+        <td>Здесь задается полный путь куда записывать лог приложения.<font color="#FFA500">  Обратите внимание: важное свойство!</font> </td>
+    </tr>
+    <tr>
+		<td><p></p></td>
+        <td>Open Trace configurate/Ниже опции настройки сервиса трассировки<br>
+		Конфигурация сервиса для трассировки сообщений Jager.<font color="#FFA500">  Обратите внимание: важное свойство!</font> </td>
+    </tr>
+    <tr>
+        <td><p>opentracing.jaeger.service-name</p></td>
+        <td>Имя приложения, которое отражается в сервисе Jaeger</td>
+    </tr>
+    <tr>
+        <td><p>opentracing.jaeger.enabled</p></td>
+        <td>TRUE - включение сервиса</td>
+    </tr>
+    <tr>
+        <td><p>opentracing.jaeger.udp-sender.host/p></td>
+        <td>IP хоста с сервром Jaeger, или имя DNS</td>
+    </tr>
+    <tr>
+        <td><p>opentracing.jaeger.udp-sender.port</p></td>
+        <td>Номер порта по которому слушает Jaeger</td>
+    </tr>
+	
+    </tbody>
+</table>
+<p>&nbsp;</p>
+
+
+
+<p></p>
+<h1>Команды actuator'a</h1>
+<p></p>
+<p style="text-align: center;"><a href="../actuator/" style="color:#245cd6;"><strong>../actuator/ </strong><font color="#8b9b55"><em><strong>
+    Переход на Актуатор</strong></em></font></a></p>
+<p> some endpoints have been added, some removed and some have been restructured:</p>
+<p></p>
+
+<table class="TableActuator" cellspacing="2" border="1" cellpadding="5" style="height: 54px; text-align: left;">
+    <thead>
+    <tr>
+        <td><span style="color: #495a7e;"> Ссылка : </span> : можно перейти</td>
+        <td><span style="color: #495a7e;"> Краткое </span> : Описание</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><p><a href="../actuator/beans" style="color:#245cd6;">/beans</a></p></td>
+        <td>Returns all available beans in our BeanFactory. Unlike /auditevents, it doesn't support filtering.</td>
+    </tr>
+    <tr>
+        <td><p><a href="../actuator/conditions" style="color:#245cd6;">/conditions</a></p></td>
+        <td>Formerly known as /autoconfig, builds a report of conditions around autoconfiguration.</td>
+    </tr>
+    <tr>
+        <td><p><a href="../actuator/configprops" style="color:#245cd6;">/configprops</a></p></td>
+        <td>Allows us to fetch all @ConfigurationProperties beans.</td>
+    </tr>
+    <tr>
+        <td><p><a href="../actuator/env" style="color:#245cd6;">/env</a></p></td>
+        <td>Returns the current environment properties. Additionally, we can retrieve single properties.</td>
+    </tr>
+
+    <tr>
+        <td><p><a href="../actuator/health" style="color:#245cd6;">/health</a></p></td>
+        <td>Summarizes the health status of our application.</td>
+    </tr>
+    <tr>
+        <td><p><a href="../actuator/heapdump" style="color:#245cd6;">/heapdump</a></p></td>
+        <td>Builds and returns a heap dump from the JVM used by our application.</td>
+    </tr>
+    <tr>
+        <td><p><a href="../actuator/loggers" style="color:#245cd6;">/loggers</a></p></td>
+        <td>Enables us to query and modify the logging level of our application.</td>
+    </tr>
+    <tr>
+        <td><p><a href="../actuator/metrics" style="color:#245cd6;">/metrics</a></p></td>
+        <td>Details metrics of our application. This might include generic metrics as well as custom ones.</td>
+    </tr>
+    <tr>
+        <td><p><a href="../actuator/metrics/http.server.requests" style="color:#245cd6;">/metrics/http.server.requests</a></p></td>
+        <td> http request count.</td>
+    </tr>
+    <tr>
+        <td><p><a href="../actuator/metrics/process.cpu.usage" style="color:#245cd6;">/metrics/process.cpu.usage</a></p></td>
+        <td> % CPU usage.</td>
+    </tr>
+    <tr>
+        <td><p><a href="../actuator/scheduledtasks" style="color:#245cd6;">/scheduledtasks</a></p></td>
+        <td> Provides details about every scheduled task within our application.</td>
+    </tr>
+    <tr>
+        <td><p><a href="../actuator/shutdown" style="color:#245cd6;">/shutdown</a></p></td>
+        <td>Performs a graceful shutdown of the application.</td>
+    </tr>
+
+    <tr>
+        <td><p><a href="../actuator/threaddump" style="color:#245cd6;">/threaddump</a></p></td>
+        <td>Dumps the thread information of the underlying JVM.</td>
+    </tr>
+
+    </tbody>
+</table>
+<p>&nbsp;</p>
+
+</body>
+</html>
